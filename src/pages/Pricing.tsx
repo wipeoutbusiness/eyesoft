@@ -146,7 +146,7 @@ export function Pricing() {
             transition={{ duration: 0.8 }}
             className="text-5xl font-bold mb-4"
           >
-            Investment
+            Pricing
           </motion.h1>
           <motion.p
             initial={{ y: 20, opacity: 0 }}
@@ -154,7 +154,7 @@ export function Pricing() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-2xl"
           >
-            Choose the perfect package for your photography needs
+            Travel fees **MAY** apply if location is 25+ minutes away. Accepted forms of payment are: Cash, Cashapp & Zelle.
           </motion.p>
         </div>
       </div>
