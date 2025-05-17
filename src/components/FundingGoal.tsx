@@ -9,7 +9,15 @@ export function FundingGoal() {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="fixed bottom-4 right-4 max-w-xs w-[90%] sm:w-80 bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-emerald-200 z-50"
+      className="
+        sm:fixed sm:bottom-4 sm:right-4 
+        w-full sm:w-80 max-w-xs mx-auto 
+        bg-white/90 backdrop-blur-sm 
+        p-4 rounded-lg shadow-lg 
+        border border-emerald-200 
+        z-40 
+        sm:z-50 
+        mt-8 sm:mt-0"
     >
       <div className="flex items-center gap-2 mb-2">
         <svg className="w-6 h-6 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
