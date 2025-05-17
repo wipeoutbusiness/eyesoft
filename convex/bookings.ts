@@ -39,11 +39,11 @@ export const sendBookingEmails = internalAction({
     vision: v.string(),
   },
   handler: async (ctx, args) => {
-    const resend = new Resend(process.env.CONVEX_RESEND_API_KEY);
+    const resend = new Resend("re_FDPXZXPn_KHRayJYPe7hBsyZbPs3XxpAN");
 
     const adminEmail = await resend.emails.send({
       from: "onboarding@resend.dev", // ✅ Verified sender
-      to: "filmbythomas@gmail.com",  // ✅ Your email
+      to: "garciathomas758@gmail.com",  // ✅ Your email
       subject: `New Booking: ${args.category} Session – ${args.package}`,
       html: `
         <h1>New Booking Received</h1>
