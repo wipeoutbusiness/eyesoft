@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { ImageModal } from "../components/ImageModal";
 
 export function Portraits() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const portraitImages = Array.from({ length: 15 }, (_, i) => `/portrait${i + 1}.jpg`);
 
   return (
@@ -41,9 +44,10 @@ export function Portraits() {
           {portraitImages.map((src, index) => (
             <motion.div
               key={index}
-              className="aspect-square overflow-hidden rounded-lg"
+              className="aspect-square overflow-hidden rounded-lg cursor-pointer"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
+              onClick={() => setSelectedImage(src)}
             >
               <img
                 src={src}
@@ -55,6 +59,14 @@ export function Portraits() {
           ))}
         </motion.div>
       </div>
+
+      {selectedImage && (
+        <ImageModal
+          src={selectedImage}
+          alt="Portrait full view"
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
     </div>
   );
 }
