@@ -6,10 +6,19 @@
     <link rel="stylesheet" href="/src/index.css" />
 
     <title>Eyes Of T</title>
-
-<link rel="icon" href="/tabicon.png" type="image/png" />
-    
+    <link rel="icon" href="/tabicon.png" type="image/png" />
     <meta property="og:image" content="/og-preview.png" />
+
+    <!-- Minimal mobile-friendly fallback -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, sans-serif;
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
