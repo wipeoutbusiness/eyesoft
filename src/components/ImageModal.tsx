@@ -77,7 +77,7 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
                     key={idx}
                     src={previewSrc}
                     alt={`Preview ${idx + 1}`}
-                    className={`w-16 h-16 object-cover rounded-lg transition-all duration-300 cursor-pointer ${
+                    className={`w-16 h-16 object-contain rounded-lg transition-all duration-300 cursor-pointer bg-black ${
                       idx === currentIndex
                         ? "ring-2 ring-emerald-500"
                         : "opacity-60 hover:opacity-100"
