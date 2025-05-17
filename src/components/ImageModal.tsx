@@ -3,9 +3,7 @@ import { useEffect, useRef } from "react";
 
 function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
   const src = images[currentIndex];
-  const previewRef = useRef(null);
-
-  if (!src) return null;
+  const intervalRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -17,29 +15,16 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose, onPrev, onNext]);
 
-  // Scroll preview strip to current image smoothly
   useEffect(() => {
-    if (previewRef.current) {
-      const previewContainer = previewRef.current;
-      const activeThumbnail = previewContainer.querySelector(
-        ".thumbnail-active"
-      );
-      if (activeThumbnail) {
-        // Scroll so active thumbnail is centered or visible
-        const containerRect = previewContainer.getBoundingClientRect();
-        const thumbRect = activeThumbnail.getBoundingClientRect();
-        const offset =
-          thumbRect.left - containerRect.left - containerRect.width / 2 + thumbRect.width / 2;
-        previewContainer.scrollBy({ left: offset, behavior: "smooth" });
-      }
-    }
-  }, [currentIndex]);
+    intervalRef.current = setInterval(() => onNext(), 3500);
+    return () => clearInterval(intervalRef.current);
+  }, [onNext]);
 
   return (
     <AnimatePresence>
       {src && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -51,12 +36,12 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
             animate={{ scale: 1 }}
             exit={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative max-w-[90vw] max-h-[80vh] w-full p-4 flex flex-col items-center"
+            className="relative max-w-6xl w-full p-4"
           >
             <img
               src={src}
               alt="Full view"
-              className="max-w-full max-h-[70vh] rounded-lg select-none pointer-events-none object-contain"
+              className="w-full h-auto rounded-lg select-none pointer-events-none"
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
             />
@@ -67,8 +52,7 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
                 e.stopPropagation();
                 onPrev();
               }}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/30 text-white hover:bg-white/50 p-4 rounded-full shadow-lg transition-colors text-3xl select-none"
-              aria-label="Previous Image"
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white bg-emerald-600 hover:bg-emerald-700 p-3 rounded-full shadow-lg"
             >
               ❮
             </button>
@@ -77,40 +61,42 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
                 e.stopPropagation();
                 onNext();
               }}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/30 text-white hover:bg-white/50 p-4 rounded-full shadow-lg transition-colors text-3xl select-none"
-              aria-label="Next Image"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white bg-emerald-600 hover:bg-emerald-700 p-3 rounded-full shadow-lg"
             >
               ❯
             </button>
 
-            {/* Preview Strip */}
-            <div
-              ref={previewRef}
-              className="mt-6 flex gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-emerald-700 scrollbar-track-transparent w-full max-w-[90vw] px-2"
-            >
-              {images.map((imgSrc, i) => (
-                <motion.img
-                  key={i}
-                  src={imgSrc}
-                  alt={`Preview ${i + 1}`}
-                  className={`h-20 w-auto rounded-lg cursor-pointer object-cover
-                    ${
-                      i === currentIndex
-                        ? "ring-4 ring-emerald-500 ring-offset-2"
-                        : "opacity-70 hover:opacity-100"
+            {/* Preview Carousel */}
+            <div className="mt-4 overflow-hidden">
+              <div className="flex justify-center gap-2 overflow-x-auto px-4 pb-2">
+                {images.map((previewSrc, idx) => (
+                  <motion.img
+                    key={idx}
+                    src={previewSrc}
+                    alt={`Preview ${idx + 1}`}
+                    className={`w-20 h-20 object-cover rounded-md transition-all duration-300 ${
+                      idx === currentIndex
+                        ? "ring-2 ring-emerald-500"
+                        : "opacity-50 hover:opacity-100"
                     }`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (i !== currentIndex) {
-                      if (i < currentIndex) onPrev();
-                      else if (i > currentIndex) onNext();
-                    }
-                  }}
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                  layoutId={`preview-${i}`}
-                />
-              ))}
+                    style={{ flex: "0 0 auto" }}
+                    onClick={() => onPrev(idx - currentIndex < 0 ? images.length - 1 : idx)}
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                ))}
+              </div>
+              {/* Dot Indicators */}
+              <div className="flex justify-center gap-1 mt-2">
+                {images.map((_, idx) => (
+                  <div
+                    key={idx}
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      idx === currentIndex ? "bg-emerald-500" : "bg-gray-400"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
         </motion.div>
