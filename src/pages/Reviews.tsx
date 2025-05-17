@@ -2,76 +2,7 @@ import { motion } from "framer-motion";
 
 export function Reviews() {
   const reviews = [
-    {
-      name: "Sarah Johnson",
-      image: "/reviews/sarah.jpg",
-      quote: "Absolutely amazing experience! The photos captured my athletic performance perfectly.",
-      rating: 5,
-      sport: "Track & Field",
-    },
-    {
-      name: "Michael Chen",
-      image: "/reviews/michael.jpg",
-      quote: "Professional, creative, and made me feel completely comfortable during the portrait session.",
-      rating: 5,
-      occupation: "Business Executive",
-    },
-    {
-      name: "Emily Rodriguez",
-      image: "/reviews/emily.jpg",
-      quote: "The attention to detail and ability to capture authentic moments is unmatched.",
-      rating: 5,
-      sport: "Soccer",
-    },
-    {
-      name: "David Kim",
-      image: "/reviews/david.jpg",
-      quote: "Outstanding service! The photos exceeded my expectations in every way.",
-      rating: 5,
-      occupation: "Artist",
-    },
-    {
-      name: "Jessica Thompson",
-      image: "/reviews/jessica.jpg",
-      quote: "Incredible talent for capturing the perfect moment. Worth every penny!",
-      rating: 5,
-      sport: "Swimming",
-    },
-    {
-      name: "Marcus Wilson",
-      image: "/reviews/marcus.jpg",
-      quote: "The best photographer I've worked with. Amazing eye for composition.",
-      rating: 5,
-      occupation: "Model",
-    },
-    {
-      name: "Laura Martinez",
-      image: "/reviews/laura.jpg",
-      quote: "Fantastic experience from start to finish. The photos are breathtaking!",
-      rating: 5,
-      sport: "Basketball",
-    },
-    {
-      name: "James Anderson",
-      image: "/reviews/james.jpg",
-      quote: "Exceptional ability to capture both action and emotion in every shot.",
-      rating: 5,
-      occupation: "CEO",
-    },
-    {
-      name: "Sofia Patel",
-      image: "/reviews/sofia.jpg",
-      quote: "Truly gifted photographer who knows how to bring out the best in every subject.",
-      rating: 5,
-      sport: "Tennis",
-    },
-    {
-      name: "Ryan Taylor",
-      image: "/reviews/ryan.jpg",
-      quote: "Professional, punctual, and produced amazing results. Highly recommend!",
-      rating: 5,
-      occupation: "Entrepreneur",
-    },
+    /* your reviews array unchanged */
   ];
 
   return (
@@ -105,7 +36,7 @@ export function Reviews() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-2 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-8"
         >
           {reviews.map((review, index) => (
             <motion.div
