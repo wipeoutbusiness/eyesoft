@@ -20,7 +20,7 @@ export function Home() {
             transition={{ duration: 0.8 }}
             className="text-7xl font-bold text-white mb-8 drop-shadow-lg"
           >
-            Capture Your Moments
+            Capture Your World
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
@@ -28,7 +28,7 @@ export function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
           >
-            Professional photography services for athletes and individuals. Creating timeless memories through the lens.
+            Professional, Unique, and Eye-catching photography services for athletes and individuals.
           </motion.p>
           <motion.div 
             initial={{ y: 20, opacity: 0 }}
