@@ -15,7 +15,7 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="text-5xl font-bold mb-4"
           >
-            About Nature's Lens
+            About Eyes Of T / Thomas Garcia
           </motion.h1>
           <motion.p 
             initial={{ y: 20, opacity: 0 }}
@@ -23,7 +23,7 @@ export function About() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-2xl"
           >
-            Capturing life's precious moments through professional photography
+            Capturing the world through my eyes.
           </motion.p>
         </div>
       </div>
@@ -39,7 +39,7 @@ export function About() {
               initial={{ scale: 0.95 }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              src="/photographer.jpg" 
+              src="/public/aboutme.jpg" 
               alt="Photographer" 
               className="w-full rounded-lg shadow-2xl" 
             />
@@ -52,7 +52,7 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="text-4xl font-bold text-emerald-900 mb-8"
             >
-              Our Story
+              My Story
             </motion.h2>
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
@@ -60,9 +60,9 @@ export function About() {
               transition={{ duration: 0.8, delay: 0.8 }}
               className="text-xl text-gray-700 mb-8 leading-relaxed"
             >
-              With over a decade of experience in professional photography, we've had the privilege of capturing countless
-              special moments for our clients. Our passion for photography drives us to constantly innovate and create
-              stunning visual narratives that tell your unique story.
+              With almost 2 years of experience in photography, I have had the privilege of capturing countless
+              special moments for my clients. My passion for photography drives me to constantly innovate and create
+              stunning visual narratives, whether it be during a game, or in your life, I want to make your photos unique and catch eyes.
             </motion.p>
             <motion.p 
               initial={{ y: 20, opacity: 0 }}
@@ -70,8 +70,8 @@ export function About() {
               transition={{ duration: 0.8, delay: 1 }}
               className="text-xl text-gray-700 leading-relaxed"
             >
-              Whether it's capturing the raw energy of athletes in motion or creating intimate portrait sessions that
-              reveal the true essence of our subjects, we bring technical expertise and artistic vision to every shoot.
+              Whether it's capturing the raw energy and the action shots of athletes in motion or creating intimate portrait sessions that
+              reveal the true essence of my clients, I bring technical expertise and artistic vision to every shoot.
             </motion.p>
           </div>
         </motion.div>
