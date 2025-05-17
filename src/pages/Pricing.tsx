@@ -6,41 +6,34 @@ export function Pricing() {
   // Athletics tiers
   const athleticsPackages = [
     {
-      name: "Basic",
-      price: "$199",
+      name: "Game Day",
+      price: "$30",
       features: [
-        "30-minute session",
-        "5 edited digital photos",
-        "Online gallery",
-        "Print release",
+        "Full game coverage", 
+        "10 edited action and game pictures"
       ],
       color: "from-blue-400 to-purple-600",
       shadow: "shadow-blue-500/30",
     },
     {
-      name: "Premium",
-      price: "$399",
+      name: "3 Day Coverage",
+      price: "$100",
       features: [
-        "1-hour session",
-        "15 edited digital photos",
-        "Online gallery",
-        "Print release",
-        "Team consultation",
+       "3 game coverage", 
+        "35-40 edited pictures", 
+        "Simple 30 second mixtape w/ song choice"
       ],
       color: "from-rose-400 to-pink-600",
       shadow: "shadow-rose-500/30",
       popular: true,
     },
     {
-      name: "Ultimate",
-      price: "$599",
+      name: "Season Coverage",
+      price: "$300",
       features: [
-        "2-hour session",
-        "30 edited digital photos",
-        "Online gallery",
-        "Print release",
-        "Unlimited outfit changes",
-        "Professional coaching photos",
+       "Full season coverage",
+        "100+ edited photos shots",
+        "Season Highlight mixtape"
       ],
       color: "from-amber-400 to-orange-600",
       shadow: "shadow-amber-500/30",
@@ -51,26 +44,23 @@ export function Pricing() {
   const portraitPackages = [
     {
       name: "Basic",
-      price: "$299",
+      price: "$155",
       features: [
-        "1-hour session",
-        "10 edited digital photos",
-        "Online gallery",
-        "Print release",
+       "1-hour session", 
+        "20 edited photos"
       ],
       color: "from-blue-400 to-purple-600",
       shadow: "shadow-blue-500/30",
     },
     {
       name: "Premium",
-      price: "$499",
+      price: "$225",
       features: [
-        "2-hour session",
-        "25 edited digital photos",
-        "Online gallery",
-        "Print release",
-        "2 outfit changes",
-        "Location consultation",
+       "2-hour session", 
+        "25 edited photos", 
+        "Location Consultation", 
+        "2 outfit changes", 
+        "10 photocards of your choice"
       ],
       color: "from-rose-400 to-pink-600",
       shadow: "shadow-rose-500/30",
@@ -78,16 +68,14 @@ export function Pricing() {
     },
     {
       name: "Ultimate",
-      price: "$799",
+      price: "$300",
       features: [
-        "3-hour session",
-        "50 edited digital photos",
-        "Online gallery",
-        "Print release",
-        "Unlimited outfit changes",
-        "Location consultation",
-        "Professional hair & makeup",
-        "Custom photo album",
+        "3-hour session", 
+        "35 edited photos", 
+        "Location Consultation", 
+        "2 outfit changes", 
+        "5 8x10 photos", 
+        "All image files"
       ],
       color: "from-amber-400 to-orange-600",
       shadow: "shadow-amber-500/30",
