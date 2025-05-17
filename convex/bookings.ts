@@ -42,7 +42,7 @@ export const sendBookingEmails = internalAction({
     // 🔍 Debug log to check if the API key is loading
     console.log("Resend key starts with:", process.env.CONVEX_RESEND_API_KEY?.slice(0, 6));
 
-    const resend = new Resend(process.env.CONVEX_RESEND_API_KEY);
+    const resend = new Resend("re_fZ7yKewB_4d7d88GJapRWbDTB7zz1QfWp");
 
     const adminEmail = await resend.emails.send({
       from: "onboarding@resend.dev",
