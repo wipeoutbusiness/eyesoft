@@ -3,6 +3,7 @@ import { v } from "convex/values";
 import { internal } from "../_generated/api";
 import { Resend } from "resend";
 
+// Create Booking Mutation
 export const createBooking = mutation({
   args: {
     name: v.string(),
@@ -17,7 +18,7 @@ export const createBooking = mutation({
       status: "pending",
     });
 
-    // Schedule email notifications
+    // Schedule email notification
     await ctx.scheduler.runAfter(0, internal.bookings.sendBookingEmails, {
       bookingId,
       ...args,
@@ -27,6 +28,7 @@ export const createBooking = mutation({
   },
 });
 
+// Internal Action to Send Booking Email to You
 export const sendBookingEmails = internalAction({
   args: {
     bookingId: v.id("bookings"),
@@ -39,10 +41,9 @@ export const sendBookingEmails = internalAction({
   handler: async (ctx, args) => {
     const resend = new Resend(process.env.CONVEX_RESEND_API_KEY);
 
-    // Send notification to your email (admin)
     const adminEmail = await resend.emails.send({
-      from: "Nature's Lens Bookings <noreply@natureslens.com>",
-      to: "filmbythomas@gmail.com",
+      from: "onboarding@resend.dev", // ✅ Verified sender
+      to: "filmbythomas@gmail.com",  // ✅ Your email
       subject: `New Booking: ${args.category} Session – ${args.package}`,
       html: `
         <h1>New Booking Received</h1>
