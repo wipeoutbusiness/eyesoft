@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
+import { ImageModal } from "../components/ImageModal";
 
 export function Athletics() {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const sportsImages = Array.from({ length: 23 }, (_, i) => `/sports${i + 1}.jpg`);
 
   return (
@@ -41,9 +44,10 @@ export function Athletics() {
           {sportsImages.map((src, index) => (
             <motion.div
               key={index}
-              className="aspect-square overflow-hidden rounded-lg"
+              className="aspect-square overflow-hidden rounded-lg cursor-pointer"
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}
+              onClick={() => setSelectedImage(src)}
             >
               <img
                 src={src}
@@ -55,6 +59,14 @@ export function Athletics() {
           ))}
         </motion.div>
       </div>
+
+      {selectedImage && (
+        <ImageModal
+          src={selectedImage}
+          alt="Athletic full view"
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
     </div>
   );
 }
