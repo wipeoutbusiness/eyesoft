@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export function FundingGoal() {
   const goal = 2500;
-  const current = 1750; // Example current amount
+  const current = 326; // Example current amount
   const percentage = (current / goal) * 100;
 
   return (
