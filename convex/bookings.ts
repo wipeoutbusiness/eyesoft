@@ -39,7 +39,7 @@ export const sendBookingEmails = internalAction({
     vision: v.string(),
   },
   handler: async (ctx, args) => {
-    const resend = new Resend("re_FDPXZXPn_KHRayJYPe7hBsyZbPs3XxpAN");
+    const resend = new Resend(process.env.CONVEX_RESEND_API_KEY);
 
     const adminEmail = await resend.emails.send({
       from: "onboarding@resend.dev", // ✅ Verified sender
