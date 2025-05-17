@@ -33,7 +33,7 @@ export function Portfolio() {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-2 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-8"
         >
           <Link to="/portfolio/athletics" className="relative group rounded-2xl overflow-hidden shadow-2xl">
             <motion.div 
