@@ -1,22 +1,59 @@
+import { motion } from "framer-motion";
+
 export function Portraits() {
-  const images = Array.from({ length: 30 }, (_, i) => `/portraits/image${i + 1}.jpg`);
+  const portraitImages = Array.from({ length: 15 }, (_, i) => `/portrait${i + 1}.jpg`);
 
   return (
     <div>
       <div className="bg-emerald-900 text-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold mb-4">Portrait Photography</h1>
-          <p className="text-xl">Capturing personalities and emotions through portraits</p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl font-bold mb-4"
+          >
+            Portrait Photography
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-xl"
+          >
+            Capturing personalities and emotions through portraits
+          </motion.p>
         </div>
       </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-3 gap-4">
-          {images.map((src, index) => (
-            <div key={index} className="aspect-square">
-              <img src={src} alt={`Portrait ${index + 1}`} className="w-full h-full object-cover rounded-lg" />
-            </div>
+        <motion.div 
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.05 }
+            }
+          }}
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+        >
+          {portraitImages.map((src, index) => (
+            <motion.div
+              key={index}
+              className="aspect-square overflow-hidden rounded-lg"
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <img
+                src={src}
+                alt={`Portrait photo ${index + 1}`}
+                className="w-full h-full object-cover rounded-lg"
+                loading="lazy"
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
