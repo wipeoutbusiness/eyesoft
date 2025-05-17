@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
   const src = images[currentIndex];
   const intervalRef = useRef(null);
+  const previewContainerRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -16,95 +17,105 @@ function ImageModal({ images, currentIndex, onClose, onPrev, onNext }) {
   }, [onClose, onPrev, onNext]);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => onNext(), 3500);
+    intervalRef.current = setInterval(() => {
+      onNext();
+    }, 3500);
     return () => clearInterval(intervalRef.current);
   }, [onNext]);
 
+  const onPreviewClick = (index) => {
+    clearInterval(intervalRef.current);
+    onNext(index);
+  };
+
+  useEffect(() => {
+    const container = previewContainerRef.current;
+    const active = container?.children[currentIndex];
+    if (active && container) {
+      container.scrollTo({
+        left: active.offsetLeft - container.offsetWidth / 2 + active.offsetWidth / 2,
+        behavior: "smooth",
+      });
+    }
+  }, [currentIndex]);
+
+  if (!src) return null;
+
   return (
     <AnimatePresence>
-      {src && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
+          onClick={(e) => e.stopPropagation()}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          exit={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          className="relative max-w-6xl w-full p-4"
         >
-          <motion.div
-            onClick={(e) => e.stopPropagation()}
-            initial={{ scale: 0.95 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 300 }}
-            className="max-w-5xl w-full bg-white rounded-xl overflow-hidden shadow-2xl flex flex-col items-center"
+          <img
+            src={src}
+            alt="Full view"
+            className="max-w-full max-h-[80vh] mx-auto object-contain rounded-lg select-none pointer-events-none"
+            draggable={false}
+            onContextMenu={(e) => e.preventDefault()}
+          />
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onPrev();
+            }}
+            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/30 text-white hover:bg-white/50 p-3 rounded-full text-2xl"
           >
-            {/* Main Image */}
-            <div className="relative w-full max-h-[80vh] overflow-hidden bg-black">
-              <img
-                src={src}
-                alt="Full view"
-                className="w-full h-full object-contain"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
+            ❮
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onNext();
+            }}
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/30 text-white hover:bg-white/50 p-3 rounded-full text-2xl"
+          >
+            ❯
+          </button>
+          <div className="mt-6 flex justify-center space-x-2">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`w-2.5 h-2.5 rounded-full ${
+                  i === currentIndex ? "bg-emerald-500" : "bg-white/40"
+                } transition-all`}
               />
-
-              {/* Arrows */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onPrev();
-                }}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white hover:bg-emerald-700 p-3 rounded-full shadow-lg"
+            ))}
+          </div>
+          <div
+            ref={previewContainerRef}
+            className="mt-4 flex overflow-x-auto space-x-2 px-2 scrollbar-hide"
+          >
+            {images.map((img, i) => (
+              <div
+                key={i}
+                className="w-16 h-16 flex items-center justify-center bg-black rounded-lg overflow-hidden"
+                onClick={() => setTimeout(() => onPreviewClick(i), 150)}
               >
-                ❮
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onNext();
-                }}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-emerald-600 text-white hover:bg-emerald-700 p-3 rounded-full shadow-lg"
-              >
-                ❯
-              </button>
-            </div>
-
-            {/* Preview Carousel */}
-            <div className="w-full py-4">
-              <div className="flex justify-center gap-2 overflow-x-auto px-4">
-                {images.map((previewSrc, idx) => (
-                  <motion.img
-                    key={idx}
-                    src={previewSrc}
-                    alt={`Preview ${idx + 1}`}
-                    className={`w-16 h-16 object-contain rounded-lg transition-all duration-300 cursor-pointer bg-black ${
-                      idx === currentIndex
-                        ? "ring-2 ring-emerald-500"
-                        : "opacity-60 hover:opacity-100"
-                    }`}
-                    onClick={() => onNext(idx)}
-                    draggable={false}
-                    onContextMenu={(e) => e.preventDefault()}
-                    whileTap={{ scale: 0.95 }}
-                  />
-                ))}
+                <img
+                  src={img}
+                  alt={`Thumbnail ${i + 1}`}
+                  className={`max-w-full max-h-full transition-all duration-300 cursor-pointer ${
+                    i === currentIndex ? "ring-2 ring-emerald-500" : "opacity-50"
+                  }`}
+                  draggable={false}
+                />
               </div>
-
-              {/* Dot Indicators */}
-              <div className="flex justify-center gap-1 mt-3">
-                {images.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={`w-2.5 h-2.5 rounded-full ${
-                      idx === currentIndex ? "bg-emerald-500" : "bg-gray-400"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </motion.div>
-      )}
+      </motion.div>
     </AnimatePresence>
   );
 }
