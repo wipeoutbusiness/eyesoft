@@ -4,7 +4,7 @@ import ImageModal from "../components/ImageModal";
 
 export function Athletics() {
   const [currentIndex, setCurrentIndex] = useState(null);
-  const sportsImages = Array.from({ length: 23 }, (_, i) => `/sports${i + 1}.jpg`);
+  const sportsImages = Array.from({ length: 22 }, (_, i) => `/sports${i + 1}.jpg`);
 
   const closeModal = () => setCurrentIndex(null);
   const showPrev = () =>
