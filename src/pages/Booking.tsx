@@ -39,46 +39,45 @@ export function Booking() {
   const portraitPackages = [
     {
       name: "Basic",
-      price: "$299",
+      price: "$155",
       color: "from-emerald-400 to-emerald-600",
-      features: ["1-hour session", "10 edited photos", "Online gallery"],
+      features: ["1-hour session", "20 edited photos", "Online gallery"],
     },
     {
       name: "Premium",
-      price: "$499",
+      price: "$225",
       color: "from-violet-400 to-violet-600",
-      features: ["2-hour session", "25 edited photos", "2 outfit changes"],
+      features: ["2-hour session", "25 edited photos", "Location Consultation", "2 outfit changes", "10 photocards of your choice"],
     },
     {
       name: "Ultimate",
-      price: "$799",
+      price: "$300",
       color: "from-amber-400 to-amber-600",
-      features: ["3-hour session", "50 edited photos", "Professional makeup"],
+      features: ["3-hour session", "35 edited photos", "Location Consultation", "2 outfit changes", "5 8x10 photos", "All image files"],
     },
   ];
 
   const athleticPackages = [
     {
       name: "Game Day",
-      price: "$399",
+      price: "$30",
       color: "from-emerald-400 to-emerald-600",
-      features: ["Full game coverage", "25 action shots", "Online gallery"],
+      features: ["Full game coverage", "10 edited action and game pictures"],
     },
     {
-      name: "Season Package",
-      price: "$899",
+      name: "3 Game Coverage",
+      price: "$100",
       color: "from-violet-400 to-violet-600",
-      features: ["3 game coverage", "75 action shots", "Team photos", "Highlight reel shots"],
+      features: ["3 game coverage", "35-40 edited pictures", "Simple 30 second mixtape w/ song choice"],
     },
     {
       name: "Elite Athlete",
-      price: "$1299",
+      price: "$300",
       color: "from-amber-400 to-amber-600",
       features: [
         "Full season coverage",
-        "200+ action shots",
-        "Personal highlight reel",
-        "Recruitment portfolio",
+        "100+ edited photos shots",
+        "Season Highlight mixtape",
       ],
     },
   ];
@@ -119,7 +118,7 @@ export function Booking() {
           role="alert"
         >
           <p>
-            Booking page in progress! If you want to book me, email me at{" "}
+            Booking page in progress! The form does not work. If you want to book me, email me at{" "}
             <a
               href="mailto:filmbythomas@gmail.com"
               className="underline hover:text-emerald-700"
