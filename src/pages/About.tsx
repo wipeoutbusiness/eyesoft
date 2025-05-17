@@ -39,7 +39,7 @@ export function About() {
               initial={{ scale: 0.95 }}
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              src="/public/aboutme.jpg" 
+              src="/public/aboutme.JPG" 
               alt="Photographer" 
               className="w-full rounded-lg shadow-2xl" 
             />
