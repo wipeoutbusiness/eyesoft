@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ImageModal } from "../components/ImageModal";
+import ImageModal from "../components/ImageModal";
 
 export function Athletics() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
