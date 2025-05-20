@@ -11,6 +11,8 @@ import { Booking } from "./pages/Booking";
 import { Toaster } from "sonner";
 import { FundingGoal } from "./components/FundingGoal";
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/LoadingScreen"; // 👈 New
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -31,14 +33,27 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Set timer to end loading after 1.5 seconds
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <Router>
-      <div className="min-h-screen bg-emerald-50">
-        <Navigation />
-        <AnimatedRoutes />
-        <FundingGoal />
-        <Toaster />
-      </div>
-    </Router>
+    <>
+      {loading && <LoadingScreen />} {/* 👈 Show loading only initially */}
+      {!loading && (
+        <Router>
+          <div className="min-h-screen bg-emerald-50">
+            <Navigation />
+            <AnimatedRoutes />
+            <FundingGoal />
+            <Toaster />
+          </div>
+        </Router>
+      )}
+    </>
   );
 }
