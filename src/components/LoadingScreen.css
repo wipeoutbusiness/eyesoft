@@ -14,21 +14,22 @@
 
 .content-wrapper {
   position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 90vw;
-  height: 150px;
   overflow: hidden;
 }
 
+/* Logo Positioning */
 .logo-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: transform 1s ease-in-out;
+  transition: transform 1.2s ease-in-out;
   z-index: 3;
 }
 
@@ -37,31 +38,30 @@
 }
 
 .logo-container.right {
-  transform: translate(calc(40vw - 50%), -50%) scale(1.5);
+  transform: translate(100px, -50%) scale(1.5); /* Move to right, slightly padded */
 }
 
 .logo-container.left {
-  transform: translate(-180px, -50%) scale(1.5);
+  transform: translate(-180px, -50%) scale(1.5); /* Move to final left position */
 }
 
 .logo-image {
   width: 90px;
   height: auto;
-  object-fit: contain;
 }
 
+/* Text Reveal */
 .text-container {
   display: flex;
   align-items: center;
-  color: #172b4d;
   font-size: 2.4rem;
+  color: #172b4d;
   opacity: 0;
   z-index: 2;
-  position: relative;
-  overflow: hidden;
   mask-image: linear-gradient(to right, transparent 0%, black 40%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
   transition: opacity 0.5s ease-in;
+  margin-left: 120px; /* Add spacing between logo and text */
 }
 
 .text-container.reveal {
@@ -72,5 +72,4 @@
 
 .divider {
   margin-right: 12px;
-  font-size: 2.4rem;
 }
