@@ -1,20 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./LoadingScreen.css";
 
 export default function LoadingScreen() {
   const [stage, setStage] = useState<"scale" | "right" | "left" | "reveal">("scale");
 
   useEffect(() => {
-    // Step 1: Start by scaling the logo (already default style)
-    const timeout1 = setTimeout(() => setStage("right"), 3000); // after 3s
-    const timeout2 = setTimeout(() => setStage("left"), 5000);  // after 5s
-    const timeout3 = setTimeout(() => setStage("reveal"), 6500); // after 6.5s
-
-    return () => {
-      clearTimeout(timeout1);
-      clearTimeout(timeout2);
-      clearTimeout(timeout3);
-    };
+    const timeouts = [
+      setTimeout(() => setStage("scale"), 0),       // Immediately scale up
+      setTimeout(() => setStage("right"), 3000),    // After 3s, move right
+      setTimeout(() => setStage("left"), 5000),     // After 5s, move left
+      setTimeout(() => setStage("reveal"), 7000),   // After 7s, reveal text
+    ];
+    return () => timeouts.forEach(clearTimeout);
   }, []);
 
   return (
@@ -23,7 +20,6 @@ export default function LoadingScreen() {
         <div className={`logo-container ${stage}`}>
           <img src="/logo.png" alt="logo" className="logo-image" />
         </div>
-
         <div className={`text-container ${stage === "reveal" ? "reveal" : ""}`}>
           <span className="divider">|</span>
           <span className="loading-text">Eyes Of T</span>
