@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   background-color: white;
-  z-index: 999;
+  z-index: 50;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +15,7 @@
 .content-wrapper {
   position: relative;
   width: 100%;
-  max-width: 1000px;
+  max-width: 900px;
   height: 150px;
   display: flex;
   align-items: center;
@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-/* Logo animation base */
+/* Logo animation */
 .logo-container {
   position: absolute;
   top: 50%;
@@ -38,16 +38,12 @@
 }
 
 .logo-container.right {
-  transform: translate(200px, -50%) scale(1.5);
-  transition: transform 2s ease-in-out;
-}
-
-.logo-container.pause {
-  transform: translate(200px, -50%) scale(1.5);
+  transform: translate(180px, -50%) scale(1.5);
+  transition: transform 1.5s ease-in-out;
 }
 
 .logo-container.left {
-  transform: translate(-220px, -50%) scale(1.5);
+  transform: translate(-180px, -50%) scale(1.5);
   transition: transform 2s ease-in-out;
 }
 
@@ -56,36 +52,31 @@
   height: auto;
 }
 
-/* Text Styling */
+/* Text Reveal */
 .text-container {
   display: flex;
   align-items: center;
   font-size: 3rem;
   color: #172b4d;
-  margin-left: 200px;
-  z-index: 1;
-  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  margin-left: 150px;
 
-  /* Curtain Masking */
-  mask-image: linear-gradient(to right, transparent 0%, black 30%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
-  mask-size: 200% 100%;
-  -webkit-mask-size: 200% 100%;
-  mask-position: 100% 0%;
-  -webkit-mask-position: 100% 0%;
+  mask-image: linear-gradient(to right, transparent 0%, black 40%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+  mask-size: 200%;
+  -webkit-mask-size: 200%;
+  mask-position: left;
+  -webkit-mask-position: left;
   transition: mask-position 2s ease-in-out, -webkit-mask-position 2s ease-in-out;
 }
 
 .text-container.reveal {
-  mask-position: 0% 0%;
-  -webkit-mask-position: 0% 0%;
+  mask-position: right;
+  -webkit-mask-position: right;
 }
 
 .divider {
   margin-right: 12px;
-  font-size: 3rem;
-}
-
-.loading-text {
   font-size: 3rem;
 }
