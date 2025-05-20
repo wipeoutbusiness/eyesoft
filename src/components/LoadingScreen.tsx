@@ -1,53 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import logo from '/logo.png'; // ensure logo.png is in the public folder or use "/logo.png" for static
+import { motion } from "framer-motion";
+import logo from "../logo.png"; // Make sure this path is correct
+import { useEffect, useState } from "react";
+import "./LoadingScreen.css"; // 👈 Optional for styling
 
-const LoadingScreen = () => {
-  const [animationPhase, setAnimationPhase] = useState<'scale' | 'right' | 'left' | 'done'>('scale');
+export default function LoadingScreen() {
+  const [showText, setShowText] = useState(false);
 
   useEffect(() => {
-    const timeouts = [
-      setTimeout(() => setAnimationPhase('right'), 2000), // after scale pause
-      setTimeout(() => setAnimationPhase('left'), 3500),  // after right move pause
-      setTimeout(() => setAnimationPhase('done'), 5000),  // after left move
-    ];
-
-    return () => timeouts.forEach(clearTimeout);
+    // Reveal text only after the logo starts sliding left
+    const timer = setTimeout(() => setShowText(true), 3700); // wait until logo slides left
+    return () => clearTimeout(timer);
   }, []);
 
-  if (animationPhase === 'done') return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-      <div className="relative flex items-center justify-center overflow-hidden w-[300px] h-[100px]">
+    <div className="fixed inset-0 bg-white z-50 flex items-center justify-center overflow-hidden">
+      <div className="relative flex items-center justify-center">
+        {/* Text stays hidden behind initially */}
         <div
-          className={`
-            absolute transition-transform duration-[1500ms] ease-in-out
-            ${animationPhase === 'scale' ? 'scale-[4] translate-x-0' : ''}
-            ${animationPhase === 'right' ? 'translate-x-20 scale-100' : ''}
-            ${animationPhase === 'left' ? '-translate-x-20 scale-100' : ''}
-          `}
-          style={{
-            zIndex: 10,
-            transitionProperty: 'transform',
-          }}
+          className={`absolute transition-opacity duration-700 ease-in-out ${
+            showText ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ left: "50%", transform: "translateX(-50%)" }}
         >
-          <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
+          <h1
+            className="text-4xl md:text-5xl font-bold text-gray-700"
+            style={{
+              fontFamily: '"Kirang Haerang", cursive',
+              whiteSpace: "nowrap",
+            }}
+          >
+            Eyes Of T
+          </h1>
         </div>
 
-        {/* Text is static behind the logo */}
-        <div
-          className="text-4xl text-gray-700"
-          style={{
-            fontFamily: '"Kirang Haerang", cursive',
-            whiteSpace: 'nowrap',
-            zIndex: 0,
+        {/* Logo with animation */}
+        <motion.img
+          src={logo}
+          alt="Logo"
+          initial={{ scale: 0, x: 0 }}
+          animate={{
+            scale: 1,
+            x: [0, 100, -120], // slide right then left
           }}
-        >
-          Eyes Of T
-        </div>
+          transition={{
+            duration: 4.5,
+            times: [0, 0.4, 1],
+            ease: "easeInOut",
+          }}
+          className="w-32 h-32 object-contain z-10"
+        />
       </div>
     </div>
   );
-};
-
-export default LoadingScreen;
+}
