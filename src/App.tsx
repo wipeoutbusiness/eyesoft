@@ -12,7 +12,6 @@ import { Toaster } from "sonner";
 import { FundingGoal } from "./components/FundingGoal";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import LoadingScreen from "./components/LoadingScreen"; // 👈 Already correct
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,19 +35,19 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5500); // ⏱️ Longer to match smoother animation
+    const timer = setTimeout(() => setLoading(false), 5500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      {loading && <LoadingScreen />} {/* 👈 Display loading animation */}
+      {loading && <LoadingScreen />}
       {!loading && (
         <Router>
-          <div className="min-h-screen bg-emerald-50">
+          <FundingGoal />
+          <div className="min-h-screen bg-emerald-50 pt-16">
             <Navigation />
             <AnimatedRoutes />
-            <FundingGoal />
             <Toaster />
           </div>
         </Router>
