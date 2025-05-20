@@ -26,7 +26,7 @@ export default function LoadingScreen() {
             className="flex items-center space-x-6"
           >
             <img
-              src={logo}
+              src="/logo.png"
               alt="Logo"
               className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
             />
