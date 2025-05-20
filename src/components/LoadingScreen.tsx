@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import logo from "../logo.png"; // Make sure this path is correct
 import { useEffect, useState } from "react";
-import "./LoadingScreen.css"; // 👈 Optional for styling
 
 export default function LoadingScreen() {
   const [showText, setShowText] = useState(false);
