@@ -37,7 +37,7 @@ export default function App() {
 
   useEffect(() => {
     // Set timer to end loading after 1.5 seconds
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 5000);
     return () => clearTimeout(timer);
   }, []);
 
