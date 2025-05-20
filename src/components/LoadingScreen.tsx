@@ -1,52 +1,52 @@
 import { motion } from "framer-motion";
-import logo from "../logo.png"; // Make sure this path is correct
+import logo from "../logo.png";
 import { useEffect, useState } from "react";
 
 export default function LoadingScreen() {
-  const [showText, setShowText] = useState(false);
+  const [startSlideLeft, setStartSlideLeft] = useState(false);
 
   useEffect(() => {
-    // Reveal text only after the logo starts sliding left
-    const timer = setTimeout(() => setShowText(true), 3700); // wait until logo slides left
-    return () => clearTimeout(timer);
+    const slideLeftTimer = setTimeout(() => setStartSlideLeft(true), 4000); // 2s wait + ~2s slide right
+    return () => clearTimeout(slideLeftTimer);
   }, []);
 
   return (
     <div className="fixed inset-0 bg-white z-50 flex items-center justify-center overflow-hidden">
-      <div className="relative flex items-center justify-center">
-        {/* Text stays hidden behind initially */}
-        <div
-          className={`absolute transition-opacity duration-700 ease-in-out ${
-            showText ? "opacity-100" : "opacity-0"
-          }`}
-          style={{ left: "50%", transform: "translateX(-50%)" }}
-        >
+      <div className="relative flex items-center justify-center w-full max-w-3xl px-4">
+        {/* Text is always there, hidden behind logo */}
+        <div className="relative z-0 ml-6">
           <h1
-            className="text-4xl md:text-5xl font-bold text-gray-700"
+            className="text-4xl md:text-5xl font-bold text-slate-800"
             style={{
               fontFamily: '"Kirang Haerang", cursive',
               whiteSpace: "nowrap",
+              overflow: "hidden",
             }}
           >
-            Eyes Of T
+            <span className="opacity-40 mr-2">|</span> Eyes Of T
           </h1>
         </div>
 
-        {/* Logo with animation */}
+        {/* Animated Logo in front, acts like a curtain */}
         <motion.img
           src="/logo.png"
           alt="Logo"
-          initial={{ scale: 0, x: 0 }}
-          animate={{
-            scale: 1,
-            x: [0, 100, -120], // slide right then left
-          }}
+          className="absolute left-1/2 -translate-x-1/2 z-10 w-32 h-32 object-contain"
+          initial={{ scale: 0 }}
+          animate={
+            startSlideLeft
+              ? {
+                  x: ["66%", "0%"], // Move back left to reveal text
+                }
+              : {
+                  scale: 1.5,
+                  x: ["0%", "66%"], // First grow + move right
+                }
+          }
           transition={{
-            duration: 4.5,
-            times: [0, 0.4, 1],
+            duration: 2,
             ease: "easeInOut",
           }}
-          className="w-32 h-32 object-contain z-10"
         />
       </div>
     </div>
