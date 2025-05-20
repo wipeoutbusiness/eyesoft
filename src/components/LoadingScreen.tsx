@@ -1,40 +1,43 @@
-import { useEffect, useState } from "react";
-import logo from "../logo.png"; // ✅ Your logo path
-import "../index.css"; // Assuming Tailwind is here
+import React, { useEffect, useRef, useState } from "react";
+import "./LoadingScreen.css";
+import logo from "../assets/logo.png"; // Make sure this path is correct
 
 export default function LoadingScreen() {
-  const [phase, setPhase] = useState<"scale" | "right" | "left" | "done">("scale");
+  const [startSlide, setStartSlide] = useState(false);
+  const [revealText, setRevealText] = useState(false);
+  const logoRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timers = [
-      setTimeout(() => setPhase("right"), 2000),
-      setTimeout(() => setPhase("left"), 4000),
-      setTimeout(() => setPhase("done"), 6000),
-    ];
-    return () => timers.forEach(clearTimeout);
+    // Step 1: Start slide to right after 2s
+    const timeout1 = setTimeout(() => {
+      setStartSlide(true);
+    }, 2000);
+
+    // Step 2: Reveal text after slide right (total 4s)
+    const timeout2 = setTimeout(() => {
+      setRevealText(true);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
   }, []);
 
-  if (phase === "done") return null;
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-      <div className="relative w-full max-w-[600px] h-[120px] overflow-hidden px-6">
-        {/* The text sits behind the logo */}
-        <div className="absolute inset-0 flex items-center justify-center text-5xl font-bold text-slate-800 font-[Kirang_Haerang]">
-          <span className="ml-[100px]">| Eyes Of T</span>
+    <div className="loading-screen">
+      <div className="content-wrapper">
+        <div
+          className={`logo-container ${startSlide ? "slide-left" : ""}`}
+          ref={logoRef}
+        >
+          <img src="/logo.png" alt="logo" className="logo-image" />
         </div>
 
-        {/* Logo that slides and reveals text */}
-        <img
-          src="/logo.png"
-          alt="Logo"
-          className={`absolute z-10 top-1/2 -translate-y-1/2 h-[90px] transition-transform duration-[2000ms]
-            ${phase === "scale" ? "scale-[1.5] left-1/2 -translate-x-1/2"
-            : phase === "right" ? "scale-[1.5] left-[66%] -translate-x-1/2"
-            : phase === "left" ? "scale-[1.5] left-[100px]"
-            : ""}`}
-          style={{ transitionTimingFunction: "ease-in-out" }}
-        />
+        <div className={`text-container ${revealText ? "reveal" : ""}`}>
+          <span className="divider">|</span>
+          <span className="loading-text">Eyes Of T</span>
+        </div>
       </div>
     </div>
   );
