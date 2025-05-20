@@ -1,13 +1,12 @@
-// src/components/LoadingScreen.tsx
 import { useEffect, useState } from "react";
-import logo from "/logo.png"; // assuming this lives in /public/logo.png
+import logo from "/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function LoadingScreen() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 5000); // 5 seconds
+    const timer = setTimeout(() => setShow(false), 5000); // 5s duration
     return () => clearTimeout(timer);
   }, []);
 
@@ -20,34 +19,31 @@ export default function LoadingScreen() {
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="relative flex items-center justify-center overflow-hidden">
-            {/* Text behind logo */}
-            <motion.h1
-              className="text-4xl md:text-6xl font-semibold text-neutral-700 absolute"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3, duration: 1.5 }}
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-            >
-              Eyes Of T
-            </motion.h1>
-
-            {/* Logo animation */}
+          <div className="relative flex items-center overflow-hidden w-[350px] md:w-[500px] h-[100px]">
+            {/* Logo */}
             <motion.img
               src="/logo.png"
               alt="Logo"
-              className="w-32 md:w-48 z-10"
-              initial={{ scale: 0, y: 0 }}
+              className="absolute w-20 md:w-28 z-10"
+              initial={{ scale: 0, x: 0 }}
               animate={{
-                scale: [0, 1.4, 1.2],
-                x: [0, 50, -120],
+                scale: 1,
+                x: [0, 80, -120],
               }}
               transition={{
-                duration: 4,
+                times: [0, 0.4, 1],
+                duration: 4.5,
                 ease: "easeInOut",
-                times: [0, 0.3, 1],
               }}
             />
+
+            {/* Static text revealed behind logo */}
+            <div
+              className="text-3xl md:text-5xl font-bold text-neutral-700 pl-28"
+              style={{ fontFamily: "'Orbitron', sans-serif" }}
+            >
+              Eyes Of T
+            </div>
           </div>
         </motion.div>
       )}
