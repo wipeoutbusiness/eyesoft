@@ -12,7 +12,7 @@ import { Toaster } from "sonner";
 import { FundingGoal } from "./components/FundingGoal";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import LoadingScreen from "./components/LoadingScreen"; // 👈 New
+import LoadingScreen from "./components/LoadingScreen"; // 👈 Already correct
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,14 +36,13 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set timer to end loading after 1.5 seconds
-    const timer = setTimeout(() => setLoading(false), 5000);
+    const timer = setTimeout(() => setLoading(false), 5500); // ⏱️ Longer to match smoother animation
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      {loading && <LoadingScreen />} {/* 👈 Show loading only initially */}
+      {loading && <LoadingScreen />} {/* 👈 Display loading animation */}
       {!loading && (
         <Router>
           <div className="min-h-screen bg-emerald-50">
