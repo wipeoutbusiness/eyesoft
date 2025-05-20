@@ -12,6 +12,7 @@
   overflow: hidden;
 }
 
+/* Wrapper for layout */
 .content-wrapper {
   position: relative;
   width: 100%;
@@ -23,7 +24,7 @@
   overflow: hidden;
 }
 
-/* Logo Positioning */
+/* Logo base style */
 .logo-container {
   position: absolute;
   top: 50%;
@@ -33,16 +34,19 @@
   z-index: 3;
 }
 
+/* Scale up from center */
 .logo-container.scale {
   transform: translate(-50%, -50%) scale(1.5);
 }
 
+/* Move slightly right */
 .logo-container.right {
-  transform: translate(100px, -50%) scale(1.5); /* Move to right, slightly padded */
+  transform: translate(50px, -50%) scale(1.5);
 }
 
+/* Move to the left for final layout */
 .logo-container.left {
-  transform: translate(-180px, -50%) scale(1.5); /* Move to final left position */
+  transform: translate(-140px, -50%) scale(1.5);
 }
 
 .logo-image {
@@ -58,10 +62,10 @@
   color: #172b4d;
   opacity: 0;
   z-index: 2;
-  mask-image: linear-gradient(to right, transparent 0%, black 40%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
+  margin-left: 120px;
+  mask-image: linear-gradient(to right, transparent 0%, black 50%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%);
   transition: opacity 0.5s ease-in;
-  margin-left: 120px; /* Add spacing between logo and text */
 }
 
 .text-container.reveal {
