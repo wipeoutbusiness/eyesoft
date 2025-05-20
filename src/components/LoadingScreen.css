@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   background-color: white;
-  z-index: 50;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,11 +12,10 @@
   overflow: hidden;
 }
 
-/* Wrapper for layout */
 .content-wrapper {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   height: 150px;
   display: flex;
   align-items: center;
@@ -24,56 +23,69 @@
   overflow: hidden;
 }
 
-/* Logo base style */
+/* Logo animation base */
 .logo-container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
-  transition: transform 1.2s ease-in-out;
+  transition: transform 2s ease-in-out;
   z-index: 3;
 }
 
-/* Scale up from center */
 .logo-container.scale {
   transform: translate(-50%, -50%) scale(1.5);
 }
 
-/* Move slightly right */
 .logo-container.right {
-  transform: translate(50px, -50%) scale(1.5);
+  transform: translate(200px, -50%) scale(1.5);
+  transition: transform 2s ease-in-out;
 }
 
-/* Move to the left for final layout */
+.logo-container.pause {
+  transform: translate(200px, -50%) scale(1.5);
+}
+
 .logo-container.left {
-  transform: translate(-140px, -50%) scale(1.5);
+  transform: translate(-220px, -50%) scale(1.5);
+  transition: transform 2s ease-in-out;
 }
 
 .logo-image {
-  width: 90px;
+  width: 100px;
   height: auto;
 }
 
-/* Text Reveal */
+/* Text Styling */
 .text-container {
   display: flex;
   align-items: center;
-  font-size: 2.4rem;
+  font-size: 3rem;
   color: #172b4d;
-  opacity: 0;
-  z-index: 2;
-  margin-left: 120px;
-  mask-image: linear-gradient(to right, transparent 0%, black 50%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%);
-  transition: opacity 0.5s ease-in;
+  margin-left: 200px;
+  z-index: 1;
+  white-space: nowrap;
+
+  /* Curtain Masking */
+  mask-image: linear-gradient(to right, transparent 0%, black 30%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
+  mask-size: 200% 100%;
+  -webkit-mask-size: 200% 100%;
+  mask-position: 100% 0%;
+  -webkit-mask-position: 100% 0%;
+  transition: mask-position 2s ease-in-out, -webkit-mask-position 2s ease-in-out;
 }
 
 .text-container.reveal {
-  opacity: 1;
-  mask-image: none;
-  -webkit-mask-image: none;
+  mask-position: 0% 0%;
+  -webkit-mask-position: 0% 0%;
 }
 
 .divider {
   margin-right: 12px;
+  font-size: 3rem;
+}
+
+.loading-text {
+  font-size: 3rem;
 }
