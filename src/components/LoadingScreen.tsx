@@ -35,7 +35,7 @@ export default function LoadingScreen() {
 
         {/* Logo with animation */}
         <motion.img
-          src={logo}
+          src="/logo.png"
           alt="Logo"
           initial={{ scale: 0, x: 0 }}
           animate={{
