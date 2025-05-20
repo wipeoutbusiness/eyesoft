@@ -6,10 +6,10 @@ export default function LoadingScreen() {
 
   useEffect(() => {
     const timeouts = [
-      setTimeout(() => setStage("scale"), 0),       // Immediately scale up
-      setTimeout(() => setStage("right"), 3000),    // After 3s, move right
-      setTimeout(() => setStage("left"), 5000),     // After 5s, move left
-      setTimeout(() => setStage("reveal"), 7000),   // After 7s, reveal text
+      setTimeout(() => setStage("scale"), 0),       // Start immediately
+      setTimeout(() => setStage("right"), 2000),    // Move right at 2s
+      setTimeout(() => setStage("left"), 4000),     // Move left at 4s
+      setTimeout(() => setStage("reveal"), 5000),   // Reveal text at 5s
     ];
     return () => timeouts.forEach(clearTimeout);
   }, []);
