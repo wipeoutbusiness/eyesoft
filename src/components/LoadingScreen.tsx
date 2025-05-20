@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import logo from "../logo.png"; // ✅ Your logo path
 import "../index.css"; // Assuming Tailwind is here
-import "./LoadingScreen.css"; // Custom styles for animation masking
 
 export default function LoadingScreen() {
   const [phase, setPhase] = useState<"scale" | "right" | "left" | "done">("scale");
