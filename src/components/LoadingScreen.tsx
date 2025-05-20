@@ -1,52 +1,53 @@
-import { useEffect, useState } from "react";
-import logo from "/logo.png";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from 'react';
+import logo from '/logo.png'; // ensure logo.png is in the public folder or use "/logo.png" for static
 
-export default function LoadingScreen() {
-  const [show, setShow] = useState(true);
+const LoadingScreen = () => {
+  const [animationPhase, setAnimationPhase] = useState<'scale' | 'right' | 'left' | 'done'>('scale');
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 5000); // 5s duration
-    return () => clearTimeout(timer);
+    const timeouts = [
+      setTimeout(() => setAnimationPhase('right'), 2000), // after scale pause
+      setTimeout(() => setAnimationPhase('left'), 3500),  // after right move pause
+      setTimeout(() => setAnimationPhase('done'), 5000),  // after left move
+    ];
+
+    return () => timeouts.forEach(clearTimeout);
   }, []);
 
-  return (
-    <AnimatePresence>
-      {show && (
-        <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-white"
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="relative flex items-center overflow-hidden w-[350px] md:w-[500px] h-[100px]">
-            {/* Logo */}
-            <motion.img
-              src="/logo.png"
-              alt="Logo"
-              className="absolute w-20 md:w-28 z-10"
-              initial={{ scale: 0, x: 0 }}
-              animate={{
-                scale: 1,
-                x: [0, 80, -120],
-              }}
-              transition={{
-                times: [0, 0.4, 1],
-                duration: 4.5,
-                ease: "easeInOut",
-              }}
-            />
+  if (animationPhase === 'done') return null;
 
-            {/* Static text revealed behind logo */}
-            <div
-              className="text-3xl md:text-5xl font-bold text-neutral-700 pl-28"
-              style={{ fontFamily: "'Orbitron', sans-serif" }}
-            >
-              Eyes Of T
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+      <div className="relative flex items-center justify-center overflow-hidden w-[300px] h-[100px]">
+        <div
+          className={`
+            absolute transition-transform duration-[1500ms] ease-in-out
+            ${animationPhase === 'scale' ? 'scale-[4] translate-x-0' : ''}
+            ${animationPhase === 'right' ? 'translate-x-20 scale-100' : ''}
+            ${animationPhase === 'left' ? '-translate-x-20 scale-100' : ''}
+          `}
+          style={{
+            zIndex: 10,
+            transitionProperty: 'transform',
+          }}
+        >
+          <img src={logo} alt="Logo" className="w-10 h-10 object-contain" />
+        </div>
+
+        {/* Text is static behind the logo */}
+        <div
+          className="text-4xl text-gray-700"
+          style={{
+            fontFamily: '"Kirang Haerang", cursive',
+            whiteSpace: 'nowrap',
+            zIndex: 0,
+          }}
+        >
+          Eyes Of T
+        </div>
+      </div>
+    </div>
   );
-}
+};
+
+export default LoadingScreen;
