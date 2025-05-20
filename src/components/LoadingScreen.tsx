@@ -1,50 +1,43 @@
-import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
+import logo from "../assets/logo.png"; // Update if your logo path is different
 
 export default function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(false);
-      document.body.style.overflow = "auto"; // re-enable scroll
-    }, 1500);
-
-    document.body.style.overflow = "hidden"; // disable scroll while loading
-
+    const timer = setTimeout(() => setShow(false), 5000); // 5 seconds
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {show && (
         <motion.div
-          className="fixed inset-0 bg-black z-50 flex items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-white"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 1 }}
         >
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1.2 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className="text-white text-5xl font-bold"
+            initial={{ scale: 0.5 }}
+            animate={{ scale: 1.5, x: -80 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            className="flex items-center space-x-6"
           >
-            <motion.div
-              initial={{ x: 0 }}
-              animate={{ x: -80 }}
-              transition={{ delay: 0.5, duration: 0.5, ease: "easeInOut" }}
-              className="flex items-center gap-4"
+            <img
+              src={logo}
+              alt="Logo"
+              className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+            />
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 1.5 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold text-emerald-800"
             >
-              <img src="/logo.png" alt="Logo" className="h-12 w-12" />
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.5 }}
-              >
-                Eyes Of T
-              </motion.span>
-            </motion.div>
+              Eyes Of T
+            </motion.h1>
           </motion.div>
         </motion.div>
       )}
