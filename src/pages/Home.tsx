@@ -1,95 +1,99 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Eye } from "lucide-react"; // Lucide icon
 
 export function Home() {
+  const slides = [
+    "/hero1.jpg",
+    "/hero2.jpg",
+    "/hero3.jpg"
+  ];
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
   return (
-    <div className="relative">
-      <div className="absolute inset-0 bg-[url('/nature.jpg')] bg-cover bg-center">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 bg-emerald-900/40 backdrop-blur-[2px]"
-        />
+    <div className="relative font-['Inter'] text-off-white">
+      {/* Slideshow Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        {slides.map((src, i) => (
+          <motion.img
+            key={i}
+            src={src}
+            alt="Hero Slide"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{
+              opacity: i === current ? 1 : 0,
+              scale: i === current ? 1 : 1.1,
+            }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ))}
+        <div className="absolute inset-0 bg-emerald-900/50 backdrop-blur-sm z-10" />
       </div>
-      <div className="relative min-h-[calc(100vh-4rem)]">
-        <div className="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
+
+      {/* Floating Logo */}
+      <motion.div
+        className="absolute top-8 left-8 z-20 text-beige"
+        initial={{ y: -10 }}
+        animate={{ y: [ -10, 10, -10 ] }}
+        transition={{ repeat: Infinity, duration: 6 }}
+      >
+        <Eye size={48} strokeWidth={1.5} />
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="relative z-20 flex items-center justify-center min-h-screen text-center px-4">
+        <div className="space-y-8 max-w-4xl mx-auto">
+          <motion.h1
+            initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="text-7xl font-bold text-white mb-8 drop-shadow-lg"
+            transition={{ duration: 1 }}
+            className="font-['Playfair_Display'] text-6xl sm:text-7xl font-bold text-off-white drop-shadow-lg"
           >
-            Capture Your World
+            Eyes of T
           </motion.h1>
-          <motion.p 
-            initial={{ y: 20, opacity: 0 }}
+
+          <motion.p
+            initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+            transition={{ duration: 1, delay: 0.3 }}
+            className="text-xl sm:text-2xl font-light text-beige leading-relaxed"
           >
-            Professional, Unique, and Eye-catching photography services for athletes and individuals.
+            Capturing emotion, movement, and identity—one frame at a time.
           </motion.p>
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4"
+
+          <motion.div
+            className="flex flex-wrap justify-center gap-6 pt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
           >
-            <Link to="/portfolio" className="group relative overflow-hidden bg-emerald-600 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              <motion.div
-                initial={false}
-                whileHover={{ scale: 1.1 }}
+            <Link to="/portfolio">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px #a7f3d0" }}
                 whileTap={{ scale: 0.95 }}
-                className="relative z-10 text-lg font-medium"
+                className="px-8 py-4 rounded-full bg-beige text-forest font-semibold shadow-md"
               >
                 View Portfolio
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-emerald-700 group-hover:scale-110 transition-transform duration-300" />
+              </motion.button>
             </Link>
-            <Link to="/pricing" className="group relative overflow-hidden bg-emerald-700 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              <motion.div
-                initial={false}
-                whileHover={{ scale: 1.1 }}
+            <Link to="/booking">
+              <motion.button
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px #a7f3d0" }}
                 whileTap={{ scale: 0.95 }}
-                className="relative z-10 text-lg font-medium"
+                className="px-8 py-4 rounded-full bg-forest text-off-white font-semibold shadow-md"
               >
-                Pricing
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-emerald-800 group-hover:scale-110 transition-transform duration-300" />
-            </Link>
-            <Link to="/reviews" className="group relative overflow-hidden bg-emerald-800 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              <motion.div
-                initial={false}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative z-10 text-lg font-medium"
-              >
-                Reviews
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-700 to-emerald-900 group-hover:scale-110 transition-transform duration-300" />
-            </Link>
-            <Link to="/about" className="group relative overflow-hidden bg-emerald-900 text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              <motion.div
-                initial={false}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative z-10 text-lg font-medium"
-              >
-                About Me
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-800 to-emerald-950 group-hover:scale-110 transition-transform duration-300" />
-            </Link>
-            <Link to="/booking" className="group relative overflow-hidden bg-white text-emerald-900 px-8 py-4 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-              <motion.div
-                initial={false}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative z-10 text-lg font-medium"
-              >
-                Book Now
-              </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-r from-white to-emerald-50 group-hover:scale-110 transition-transform duration-300" />
+                Book a Session
+              </motion.button>
             </Link>
           </motion.div>
         </div>
