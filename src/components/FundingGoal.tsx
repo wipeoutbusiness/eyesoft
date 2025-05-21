@@ -7,7 +7,7 @@ export function FundingGoal() {
   const percentage = (current / goal) * 100;
 
   const [expanded, setExpanded] = useState(false);
-  const cameraLink = "https://your-camera-link.com"; // <-- replace with your actual link
+  const cameraLink = "https://www.amazon.com/Sony-Full-Frame-Mirrorless-Interchangeable-Renewed/dp/B09P21LZXL/ref=sr_1_5?crid=3DRDFYLVYM57M&dib=eyJ2IjoiMSJ9.QfNj4QE5bqfH2Yv250aaUsCte7puQI6Z1irsVCq8Pi5b8TWlWfhj9UnbOzNPDdCBGK_xV0mgWuSBvJVk8cSvnGY3178UAGfqwZAgE0GRNDZJJ9uY8TQkDyVAsjiGVeNuOrISbig3t1yRB-pSX10zj6cawNpDAo_BhsNGbQmyvkuUENwdAXe72Vw_3n8evz896aqg3z_x-TUPkj-ul9ie9m0Fslo5Sz_bcnLFEBKgRTA.iuTUUyryiRP_plQnkdnibpYLgLQGt1Tyo4LkXTFAykI&dib_tag=se&keywords=sony%2Ba7iv&qid=1747786102&sprefix=sony%2Ba7iv%2Caps%2C115&sr=8-5&th=1"; // <-- replace with your actual link
 
   return (
     <motion.div
