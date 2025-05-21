@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { User, Activity } from "lucide-react";
 
 export function Portfolio() {
   return (
@@ -7,18 +8,20 @@ export function Portfolio() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
+      className="bg-charcoal text-off-white font-inter"
     >
-      <div className="bg-emerald-900 text-white py-24">
+      {/* Hero Header */}
+      <div className="py-24 text-center bg-forest">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.h1 
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl font-bold mb-4"
+            className="text-5xl font-playfair font-bold mb-4"
           >
-            Our Portfolio
+            My Portfolio
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -28,62 +31,70 @@ export function Portfolio() {
           </motion.p>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-8"
+
+      {/* Category Cards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-12"
         >
-          <Link to="/portfolio/athletics" className="relative group rounded-2xl overflow-hidden shadow-2xl">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
+          {/* Athletics */}
+          <Link to="/portfolio/athletics" className="relative group rounded-2xl overflow-hidden shadow-xl">
+            <motion.div
+              whileHover={{ scale: 1.07 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 bg-[url('/athletics.jpg')] bg-cover bg-center transform transition-transform duration-700"
+              className="absolute inset-0 bg-[url('/athletics.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-            <div className="relative h-[400px] p-12 flex flex-col justify-end text-white">
-              <motion.h2 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-4xl font-bold mb-4"
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-forest/60 to-transparent group-hover:opacity-80 transition-opacity duration-300 z-10" />
+            <div className="relative z-20 h-[400px] p-10 flex flex-col justify-end">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="flex items-center gap-4 mb-4 text-sage"
               >
-                Athletics
-              </motion.h2>
-              <motion.p 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="text-xl"
+                <Activity size={32} />
+                <h2 className="text-4xl font-playfair font-bold">Athletics</h2>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-lg"
               >
-                Capturing the power and grace of athletes in motion
+                Capturing the grace, grit, and motion of athletes in action.
               </motion.p>
             </div>
           </Link>
-          <Link to="/portfolio/portraits" className="relative group rounded-2xl overflow-hidden shadow-2xl">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
+
+          {/* Portraits */}
+          <Link to="/portfolio/portraits" className="relative group rounded-2xl overflow-hidden shadow-xl">
+            <motion.div
+              whileHover={{ scale: 1.07 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 bg-[url('/portraits.jpg')] bg-cover bg-center transform transition-transform duration-700"
+              className="absolute inset-0 bg-[url('/portraits.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-900 via-emerald-900/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-            <div className="relative h-[400px] p-12 flex flex-col justify-end text-white">
-              <motion.h2 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="text-4xl font-bold mb-4"
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-forest/60 to-transparent group-hover:opacity-80 transition-opacity duration-300 z-10" />
+            <div className="relative z-20 h-[400px] p-10 flex flex-col justify-end">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="flex items-center gap-4 mb-4 text-sage"
               >
-                Portraits
-              </motion.h2>
-              <motion.p 
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="text-xl"
+                <User size={32} />
+                <h2 className="text-4xl font-playfair font-bold">Portraits</h2>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-lg"
               >
-                Professional portraits that capture your authentic self
+                Honest, editorial, and expressive portraits with soul.
               </motion.p>
             </div>
           </Link>
