@@ -33,10 +33,12 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-emerald-50 pt-16 relative z-0">
-        <FundingGoal /> {/* Alert-style banner at the top */}
+      <div className="min-h-screen bg-emerald-50 flex flex-col">
         <Navigation />
-        <AnimatedRoutes />
+        <FundingGoal /> {/* 👈 This is now placed right below the navigation */}
+        <main className="flex-grow">
+          <AnimatedRoutes />
+        </main>
         <Toaster />
       </div>
     </Router>
