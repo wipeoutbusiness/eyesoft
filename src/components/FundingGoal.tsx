@@ -41,7 +41,7 @@ export function FundingGoal() {
             />
           </svg>
           <div className="text-emerald-900 font-semibold text-sm">
-            We're currently{" "}
+            I'm currently{" "}
             <a
               href={cameraLink}
               onClick={(e) => e.stopPropagation()}
@@ -81,7 +81,7 @@ export function FundingGoal() {
             className="mt-3 text-sm text-emerald-800 max-w-4xl mx-auto leading-relaxed"
           >
             Upgrading to a better camera will significantly improve the quality
-            of our work and allow us to offer even more value to our clients. Every
+            of my work and allow me to offer even more value to our clients. Every
             contribution helps bring that goal closer to reality.
           </motion.div>
         )}
