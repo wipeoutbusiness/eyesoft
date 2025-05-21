@@ -39,4 +39,9 @@ window.addEventListener('message', async (message) => {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      external: ["lucide-react"], // ✅ Add this to fix Netlify error
+    },
+  },
 }));
