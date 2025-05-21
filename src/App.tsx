@@ -11,7 +11,6 @@ import { Booking } from "./pages/Booking";
 import { Toaster } from "sonner";
 import { FundingGoal } from "./components/FundingGoal";
 import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -32,26 +31,14 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 5500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      {loading && <LoadingScreen />}
-      {!loading && (
-        <Router>
-          <FundingGoal />
-          <div className="min-h-screen bg-emerald-50 pt-16">
-            <Navigation />
-            <AnimatedRoutes />
-            <Toaster />
-          </div>
-        </Router>
-      )}
-    </>
+    <Router>
+      <div className="min-h-screen bg-emerald-50 pt-16 relative z-0">
+        <FundingGoal /> {/* Alert-style banner at the top */}
+        <Navigation />
+        <AnimatedRoutes />
+        <Toaster />
+      </div>
+    </Router>
   );
 }
