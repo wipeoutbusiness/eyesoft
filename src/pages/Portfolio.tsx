@@ -46,7 +46,7 @@ export function Portfolio() {
             <motion.div
               whileHover={{ scale: 1.07 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 bg-[url('/athletics.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
+              className="absolute inset-0 bg-[url('/sport1.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-forest/60 to-transparent group-hover:opacity-80 transition-opacity duration-300 z-10" />
             <div className="relative z-20 h-[400px] p-10 flex flex-col justify-end">
@@ -75,7 +75,7 @@ export function Portfolio() {
             <motion.div
               whileHover={{ scale: 1.07 }}
               transition={{ duration: 0.6 }}
-              className="absolute inset-0 bg-[url('/portraits.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
+              className="absolute inset-0 bg-[url('/portrait1.jpg')] bg-cover bg-center scale-100 group-hover:scale-110 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-forest/60 to-transparent group-hover:opacity-80 transition-opacity duration-300 z-10" />
             <div className="relative z-20 h-[400px] p-10 flex flex-col justify-end">
