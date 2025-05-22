@@ -4,18 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "convex dev --once && node setup.mjs && npm-run-all --parallel dev:frontend dev:backend",
-  "dev:frontend": "vite --open",
-  "dev:backend": "convex dev",
-  "lint": "tsc -p convex -noEmit --pretty false && tsc -p . -noEmit --pretty false && convex dev --once && vite build",
-  "build": "vite build",
-  "preview": "vite preview"
+    "dev": "convex dev --once && node setup.mjs && npm-run-all --parallel dev:frontend dev:backend",
+    "dev:frontend": "vite --open",
+    "dev:backend": "convex dev",
+    "lint": "tsc -p convex -noEmit --pretty false && tsc -p . -noEmit --pretty false && convex dev --once && vite build",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@convex-dev/auth": "^0.0.80",
     "clsx": "^2.1.1",
     "convex": "1.21.1-alpha.1",
     "framer-motion": "^12.11.3",
+    "lucide-react": "^0.352.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.6.0",
