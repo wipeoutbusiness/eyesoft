@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { Eye } from "lucide-react"; // Lucide icon
 
 export function Home() {
-  const slides = [
-    "/hero1.jpg",
-    "/hero2.jpg",
-    "/hero3.jpg"
-  ];
+const slides = [
+  "https://picsum.photos/id/1015/1200/800",
+  "https://picsum.photos/id/1025/1200/800",
+  "https://picsum.photos/id/1035/1200/800"
+];
 
   const [current, setCurrent] = useState(0);
 
